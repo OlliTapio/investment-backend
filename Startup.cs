@@ -30,6 +30,17 @@ namespace investment_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add service and create Policy with options
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials() );
+            });
+    
+
             // Add framework services.
             services.AddMvc();
             services.AddSingleton<IPortfolioService, PortfolioService>();
@@ -45,6 +56,9 @@ namespace investment_backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // global policy - assign here or on each controller
+            app.UseCors("CorsPolicy");  
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
