@@ -8,7 +8,7 @@ This is the back for the team "Finnish-Swiss-Connection", using the Nordea Open 
 
 ## Restore & Run
 The project uses the dotnet watch for live development.
-
+ 
 ```
 dotnet restore
 dornet watch run
