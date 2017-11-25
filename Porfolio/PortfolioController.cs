@@ -19,8 +19,8 @@ namespace investment_backend.Portfolio
         }
 
         // GET api/portfolio
-        [HttpGet]
-        public async Task<Account> Get()
+        [HttpGet("account")]
+        public async Task<Account> GetAccount()
         {
             var returnValue = await _portfolioService.GetAcccount();
             return returnValue;
