@@ -18,4 +18,4 @@ dornet watch run
 
 | Endpoint | Return |
 |-|-|
-|api/Portfolio/account| acount{AvailableBalance, BookedBalance}|
+|api/Portfolio/account| account{AvailableBalance, BookedBalance}|
