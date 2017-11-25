@@ -28,17 +28,15 @@ namespace investment_backend.Portfolio
         }
 
         public async Task<Account> GetAcccount(){
-            var accountTransactions = (JObject)JsonConvert.DeserializeObject(System.IO.File.ReadAllText(Directory.GetCurrentDirectory() + "/json/nordea_account_transactions_FI6593857450293470-EUR.json"));
-
+            var accountTransactions = await GetAccountTransactionsFromApi();
             ParseTransactions(accountTransactions);
 
             var accountDetails = await GetAccountDetailsFromApi();
-            var returnValue = ParseAccount(accountDetails);
+            var returnValue = ParseAccountDetails(accountDetails);
             return returnValue;
         }
 
         private async Task<JObject> GetAccountDetailsFromApi(){
-            //var accountDetails = (JObject)JsonConvert.DeserializeObject(System.IO.File.ReadAllText(Directory.GetCurrentDirectory() + "/json/nordea_account_details_FI6593857450293470-EUR.json"));
             var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Add("X-IBM-Client-Id", _clientId);
@@ -55,7 +53,7 @@ namespace investment_backend.Portfolio
             return accountDetails;
         }
 
-        private Account ParseAccount(JObject accountDetails){
+        private Account ParseAccountDetails(JObject accountDetails){
             Console.Write(accountDetails);
             var account = new Account();
             account.AvailableBalance = (double)accountDetails["response"]["availableBalance"];
@@ -63,6 +61,20 @@ namespace investment_backend.Portfolio
             return account;
         }
 
+        private async Task<JObject> GetAccountTransactionsFromApi(){
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("X-IBM-Client-Id", _clientId);
+            client.DefaultRequestHeaders.Add("X-IBM-Client-Secret", _clientSecret);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+
+            var stringTask = client.GetStringAsync("https://api.hackathon.developer.nordeaopenbanking.com/v2/accounts/" + _accountId + "/transactions");
+ 
+            var msg = await stringTask;
+            var accountTransactions = (JObject)JsonConvert.DeserializeObject(msg);
+            
+            return accountTransactions;
+        }
         private List<Transaction> ParseTransactions(JObject accountTransactions)
         {
             var transactions = new List<Transaction>();
