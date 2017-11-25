@@ -1,0 +1,36 @@
+{
+    "groupHeader": {
+      "messageIdentification": "-zADYqySWv8",
+      "creationDateTime": "2017-11-25T12:28:37.884Z",
+      "httpCode": 200
+    },
+    "response": {
+      "_id": "FI6593857450293470-EUR",
+      "country": "FI",
+      "accountNumber": {
+        "value": "FI6593857450293470",
+        "_type": "IBAN"
+      },
+      "currency": "EUR",
+      "ownerName": "Oy Company AB",
+      "product": "SHEKKITILI",
+      "accountType": "Current",
+      "availableBalance": "6774.44",
+      "bookedBalance": "6774.44",
+      "valueDatedBalance": "6774.44",
+      "bank": {
+        "name": "Nordea",
+        "bic": "NDEAFIHH",
+        "country": "FI"
+      },
+      "status": "OPEN",
+      "creditLimit": "100",
+      "latestTransactionBookingDate": "2017-11-25",
+      "_links": [
+        {
+          "rel": "transactions",
+          "href": "/v2/accounts/FI6593857450293470-EUR/transactions"
+        }
+      ]
+    }
+  }
