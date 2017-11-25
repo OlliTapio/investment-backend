@@ -16,6 +16,6 @@ dornet watch run
 
 ## API Endpoint
 
-| Endpoint | Explaination |
+| Endpoint | Return |
 |-|-|
 |api/Portfolio/account| acount{AvailableBalance, BookedBalance}|
