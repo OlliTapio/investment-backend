@@ -16,6 +16,8 @@ dornet watch run
 
 ## API Endpoint
 
+The Swagger can be found under: [http://localhost:5000/swagger/](http://localhost:5000/swagger/)
+
 | Endpoint | Return |
 |-|-|
 |api/Portfolio/account| account{AvailableBalance, BookedBalance}|
